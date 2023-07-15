@@ -63,6 +63,7 @@ jobs:
           envs: GITHUB_SHA
           script: |
             sudo su
+            docker run hello-world
             docker rm -f $(docker ps -qa)
             exit
             sudo docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
