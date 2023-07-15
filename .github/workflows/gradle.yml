@@ -55,16 +55,19 @@ jobs:
 
       # ec2 에 배포
       - name: Deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ec2-3-35-53-99.ap-northeast-2.compute.amazonaws.com
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            sudo docker rm -f $(docker ps -qa)
+            sudo su
+            docker rm -f $(docker ps -qa)
+            exit
             sudo docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
             sudo docker tag dlrbcnvk/springdocker:${GITHUB_SHA::7} springdocker
             sudo docker run -d --rm --name springdocker -p 80:8080 springdocker
+            
 
 
