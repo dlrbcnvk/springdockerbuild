@@ -58,7 +58,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ec2-3-35-53-99.ap-northeast-2.compute.amazonaws.com
-          username: springhost
+          username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
