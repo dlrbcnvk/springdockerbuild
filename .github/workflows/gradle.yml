@@ -68,7 +68,8 @@ jobs:
             exit
             sudo docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
             sudo docker tag dlrbcnvk/springdocker:${GITHUB_SHA::7} springdocker
-            sudo docker run -d --rm --name springdocker -p 80:8080 springdocker
+            sudo docker run -d --name springdocker -p 80:8080 springdocker
+            sudo docker ps
              
 
 
