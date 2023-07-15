@@ -38,7 +38,7 @@ jobs:
 
       # Docker image build
       - name: docker image build
-        run: docker build -t deapsea/springdocker .
+        run: docker build -t dlrbcnvk/springdocker .
 
       # DockerHub Login
       - name: docker login
@@ -49,7 +49,7 @@ jobs:
 
       # Docker Hub push
       - name: docker Hub push
-        run: docker push deapsea/springdocker
+        run: docker push dlrbcnvk/springdocker
 
       # 빌드 결과 업로드
       - name: Upload Build File
