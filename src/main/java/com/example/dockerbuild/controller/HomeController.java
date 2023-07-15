@@ -15,6 +15,6 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
         log.info("GET / called");
-        return "home";
+        return "home page!";
     }
 }
