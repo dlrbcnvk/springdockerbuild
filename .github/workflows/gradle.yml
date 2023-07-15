@@ -38,7 +38,7 @@ jobs:
 
       # Docker image build
       - name: docker image build
-        run: docker build -t dlrbcnvk/springdocker .
+        run: docker build -t springdocker .
 
       # DockerHub Login
       - name: docker login
@@ -49,14 +49,22 @@ jobs:
 
       # Docker Hub push
       - name: docker Hub push
-        run: docker push dlrbcnvk/springdocker
+        run: |
+          docker tag springdocker dlrbcnvk/springdocker:${GITHUB_SHA::7} 
+          docker push dlrbcnvk/springdocker:${GITHUB_SHA::7}
 
-      # 빌드 결과 업로드
-      - name: Upload Build File
-        uses: actions/upload-artifact@v2
+      # ec2 에 배포
+      - name: Deploy
+        uses: appleboy/ssh-action@master
         with:
-          name: build
-          path: build/libs/app.jar
-
+          host: ec2-3-35-53-99.ap-northeast-2.compute.amazonaws.com
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GITHUB_SHA
+          script: |
+            docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
+            docker tag dlrbcnvk/springdocker:${GITHUB_SHA::7} springdocker
+            docker stop springdocker
+            docker run -d --rm --name springdocker -p 80:8080 springdocker
 
 
