@@ -65,6 +65,7 @@ jobs:
             sudo su
             docker run hello-world
             docker rm -f $(docker ps -qa)
+            sudo docker rmi $(sudo docker images -q --filter "reference=dlrbcnvk/springdocker*") -f
             exit
             sudo docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
             sudo docker tag dlrbcnvk/springdocker:${GITHUB_SHA::7} springdocker
