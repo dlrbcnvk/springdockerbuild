@@ -58,13 +58,13 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ec2-3-35-53-99.ap-northeast-2.compute.amazonaws.com
-          username: ec2-user
+          username: springhost
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
-            docker tag dlrbcnvk/springdocker:${GITHUB_SHA::7} springdocker
-            docker stop springdocker
-            docker run -d --rm --name springdocker -p 80:8080 springdocker
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull dlrbcnvk/springdocker:${GITHUB_SHA::7}
+            sudo docker tag dlrbcnvk/springdocker:${GITHUB_SHA::7} springdocker
+            sudo docker run -d --rm --name springdocker -p 80:8080 springdocker
 
 
