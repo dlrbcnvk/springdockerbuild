@@ -24,6 +24,15 @@ public class HomeController {
         String strIP = addr.getHostAddress();
         String hostName = addr.getHostName();
 
-        return "home page!\n\nserver IP: " + strIP + "\n\nhostname: " + hostName;
+        StringBuilder sb = new StringBuilder();
+        sb.append("home page");
+        sb.append("<br><br>");
+        sb.append("server IP: ");
+        sb.append(strIP);
+        sb.append("<br><br>");
+        sb.append("hostname: ");
+        sb.append(hostName);
+
+        return sb.toString();
     }
 }
