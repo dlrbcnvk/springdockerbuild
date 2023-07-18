@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @RestController
 @Slf4j
 public class HomeController {
@@ -13,8 +16,14 @@ public class HomeController {
     String version;
 
     @GetMapping("/")
-    public String home() {
+    public String home() throws UnknownHostException {
         log.info("GET / called");
-        return "home page!\n";
+
+        // 서버 ip, hostname
+        InetAddress addr = InetAddress.getLocalHost();
+        String strIP = addr.getHostAddress();
+        String hostName = addr.getHostName();
+
+        return "home page!\n\nserver IP: " + strIP + "\n\nhostname: " + hostName;
     }
 }
