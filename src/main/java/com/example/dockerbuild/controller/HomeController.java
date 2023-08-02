@@ -38,7 +38,7 @@ public class HomeController {
 
     @GetMapping("/api")
     public String api() throws UnknownHostException {
-        log.info("GET / called");
+        log.info("GET /api called");
 
         // 서버 ip, hostname
         InetAddress addr = InetAddress.getLocalHost();
