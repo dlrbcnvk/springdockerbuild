@@ -40,12 +40,15 @@ public class HomeController {
     public String api() throws UnknownHostException {
         log.info("GET /api called");
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("server.port=8080");
+        sb.append("<br><br>");
+
         // 서버 ip, hostname
         InetAddress addr = InetAddress.getLocalHost();
         String strIP = addr.getHostAddress();
         String hostName = addr.getHostName();
 
-        StringBuilder sb = new StringBuilder();
         sb.append("home page");
         sb.append("<br><br>");
         sb.append("server IP: ");
@@ -53,6 +56,30 @@ public class HomeController {
         sb.append("<br><br>");
         sb.append("hostname: ");
         sb.append(hostName);
+
+        return sb.toString();
+    }
+
+    @GetMapping("/web")
+    public String web() throws UnknownHostException {
+        log.info("GET /api called");
+
+        // 서버 ip, hostname
+        InetAddress addr = InetAddress.getLocalHost();
+        String strIP = addr.getHostAddress();
+        String hostName = addr.getHostName();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("server.port=80");
+        sb.append("<br><br>");
+        sb.append("home page");
+        sb.append("<br><br>");
+        sb.append("server IP: ");
+        sb.append(strIP);
+        sb.append("<br><br>");
+        sb.append("hostname: ");
+        sb.append(hostName);
+
 
         return sb.toString();
     }
