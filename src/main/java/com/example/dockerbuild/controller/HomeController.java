@@ -35,4 +35,25 @@ public class HomeController {
 
         return sb.toString();
     }
+
+    @GetMapping("/api")
+    public String api() throws UnknownHostException {
+        log.info("GET / called");
+
+        // 서버 ip, hostname
+        InetAddress addr = InetAddress.getLocalHost();
+        String strIP = addr.getHostAddress();
+        String hostName = addr.getHostName();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("home page");
+        sb.append("<br><br>");
+        sb.append("server IP: ");
+        sb.append(strIP);
+        sb.append("<br><br>");
+        sb.append("hostname: ");
+        sb.append(hostName);
+
+        return sb.toString();
+    }
 }
