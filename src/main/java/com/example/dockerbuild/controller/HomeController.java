@@ -56,6 +56,8 @@ public class HomeController {
         sb.append("<br><br>");
         sb.append("hostname: ");
         sb.append(hostName);
+        sb.append("<br><br>");
+        sb.append("헤헤...");
 
         return sb.toString();
     }
